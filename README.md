@@ -35,3 +35,12 @@ Just highlight the text you want to search for and then hit
 the appropriate button for the search you want.
 
 
+Makefile
+--------
+Here are the valid make targets:
+    make help       show this help
+    make test       launch trial search-bar
+    make install    install scripts and icons
+    make deb        install to deb/ subdirectory
+    make clean      delete the deb/ subdirectory
+
