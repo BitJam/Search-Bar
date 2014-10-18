@@ -38,6 +38,7 @@ the appropriate button for the search you want.
 Makefile
 --------
 Here are the valid make targets:
+
     make help       show this help
     make test       launch trial search-bar
     make install    install scripts and icons
