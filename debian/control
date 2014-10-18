@@ -1,0 +1,13 @@
+Source: search-bar
+Section: system
+Priority: optional
+Maintainer: James Bowlin <bitjam@gmail.com>
+Build-Depends: debhelper (>=7.0.50~)               
+Standards-Version: 3.9.4
+Homepage: https://github.com/BitJam/Search-Bar
+
+Package: search-bar
+Architecture: any
+Depends: ${perl:Depends}, xclip 
+Description: Internet Search from CLI and X CLipboard
+ Internet Searches from CLI and X Clipboard
