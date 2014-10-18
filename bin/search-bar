@@ -182,7 +182,7 @@ BUTTON_imdbe="
 BUTTON_dict="
 <button tooltip-text=\"Dictionary Search\">
 <input file>$IDIR/thesaurus.png</input>
-<action>word-search</action>
+<action>dict-search</action>
 </button>
 "
 
