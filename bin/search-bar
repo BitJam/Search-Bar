@@ -5,8 +5,7 @@
 
 ME=${0##*/}
 
-IDIR="$HOME/Icons"
-[ -d /usr/share/$ME/icons ] && IDIR=/usr/share/$ME/icons
+IDIR=/usr/local/share/icons/search-bar
 
        TITLE="Search Bar"
      BUTTONS="startpage,duckduckgo,google,imdb,dict,wiki,mx,antix,amazon"
