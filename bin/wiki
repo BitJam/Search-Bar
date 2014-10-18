@@ -1,3 +1,5 @@
 #!/bin/bash
-search-any "http://en.wikipedia.org/w/index.php?search=" "$@"
+
+env PATH=/usr/local/lib/search-bar/bin:$PATH search-any \
+    "http://en.wikipedia.org/w/index.php?search=" "$@"
 
