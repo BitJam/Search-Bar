@@ -1,0 +1,5 @@
+#!/bin/bash
+
+env PATH=/usr/local/lib/search-bar/bin:$PATH search-any search-any \
+    "http://forums.gentoo.org/search.php?show_results=topics&search_terms=all&search_keywords=" "$@"
+

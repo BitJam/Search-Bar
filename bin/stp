@@ -1,0 +1,3 @@
+#!/bin/bash
+
+search-any "https://startpage.com/do/search?query=" "$@"

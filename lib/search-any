@@ -1,0 +1,62 @@
+#!/bin/bash
+
+# Copyright 2012 -- 2014  James Bowlin (bitjam@gmail.com)
+# Released under the GPL 3
+
+# Grab the search URL
+url=$1; shift
+
+# Find a valid default web browser
+alt_dir=/etc/alternatives
+browser=
+
+# Use CLI browser if we are launched in a virtual terminal
+if [ -z "$DISPLAY" ]; then
+    CLI=" CLI"
+    browser_var=CLI_BROWSER
+    browser_list="links2 elinks lynx links w3m"
+    alt_browser=www-browser
+else
+    CLI=
+    browser_var=BROSWER
+    browser_list="xdg-open iceweasel firefox"
+    alt_browser=x-www-browser
+fi
+
+eval def_browser=\$$BROWSWER_VAR
+for b in $def_browser $(readlink -f $alt_dir/$alt_browser) $browser_list; do
+    b=$(which $b 2>/dev/null) || continue
+    test -x $b || continue
+    browser=$b
+    break
+done
+
+# echo $browser
+
+if [ -z "$browser" ]; then
+    echo "Could not find any$CLI browser!" >&2
+    echo "Please set $BROWSER_VAR to a valid browswer executable" >&2
+    exit 2
+fi
+
+# Use clipboard if no search terms are given
+[ $# -gt 0 ] || set -- $(xclip -o)
+
+# If the first arg looks like a URL, go directly to it
+lower=${*,,}
+url_match=$(expr match "$lower" '^\(http\|https\|ftp\)://')
+
+if [ -n "$url_match" ]; then
+    args="$*"
+else
+    args="$url$(url-encode "$@")"
+fi
+
+if [ "$CLI" ]; then
+    $browser "$args"
+else
+    $browser "$args" &> /dev/null &
+fi
+
+exit 0
+

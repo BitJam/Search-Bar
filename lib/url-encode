@@ -1,0 +1,32 @@
+#!/usr/bin/perl 
+
+# Copyright 2012 -- 2014  James Bowlin (bitjam@gmail.com)
+# Released under the GPL 3
+
+#
+# URL encodes all input args, with a few tricks
+#
+# Usage inside a bash script (the quotes around $@ are required):
+#    
+#    args=$(url-encode "$@")
+#
+#    args=$(url-encode `xclip -o`)
+
+
+for (@ARGV) {
+    s/^\s+|\s+$//;              # remove leading/trailing whitespace (ws)
+    m/\s/ and $_ = qq{"$_"};    # interior ws => quote the string
+
+    # Escape wacky characters
+    s{([^-.~\w\s'/i$!*()])}{sprintf("%%%02X", ord($1))}seg;
+
+    # Convert whitespace to plus signs
+    s/\s+/+/g;
+}
+
+# "Return" (via print) one big string
+print join "+",  @ARGV;
+
+
+
+

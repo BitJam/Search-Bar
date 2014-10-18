@@ -1,0 +1,4 @@
+#!/bin/bash
+
+env PATH=/usr/local/lib/search-bar/bin:$PATH search-any \
+    "http://www.amazon.com/s/ref=nb_sb_noss?url=search-alias=aps&field-keywords=" "$@"

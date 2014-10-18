@@ -1,0 +1,275 @@
+#!/bin/bash
+
+# Copyright 2012 -- 2014  James Bowlin (bitjam@gmail.com)
+# Released under the GPL 3
+
+ME=${0##*/}
+
+IDIR="$HOME/Icons"
+[ -d /usr/share/$ME/icons ] && IDIR=/usr/share/$ME/icons
+
+       TITLE="Search Bar"
+     BUTTONS="startpage,duckduckgo,google,imdb,dict,wiki,mx,antix,amazon"
+      ORIENT="v"
+   TEST_MODE=
+ CONFIG_FILE=$HOME/.config/$ME.conf
+
+usage() {
+    local ret=${1:-0}
+    cat <<Usage
+Usage: $ME [options]
+
+Options:
+  -a --all              Use all available buttons
+  -b --buttons <list>   Use buttons from <list>
+  -c --config  <file>   Load configuration from <file>
+  -h --help             Show this help
+  -i --idir    <dir>    Look for icons in directory <dir>
+  -l --list             List all buttons
+  -o --orient  <h|v>    Orient the bar vertically or horizontally
+  -s --save             Save current configuration
+  -t --title   <text>   Use <text> as the title ($TITLE)
+  -T --test             Test mode
+
+Default config file: ~/.config/$ME.conf
+Usage
+
+    exit $ret
+}
+
+main() {
+
+    local short_stack="abchilostT"
+    local arg val
+
+    while [ $# -gt 0 -a -z "${1##-*}" ]; do
+        arg=${1#-}; shift
+
+        # Unstack single-letter options
+        case $arg in
+            [$short_stack][$short_stack]*)
+                if echo "$arg" | grep -q "^[$short_stack]\+$"; then
+                    set -- $(echo $arg | sed -r 's/([a-zA-Z])/ -\1 /g') "$@"
+                    continue
+                fi;;
+        esac
+
+        # Deal with all options that take a parameter
+        case $arg in
+            -buttons|b|-config|c|-idir|i|-orient|o|-title|t)
+                [ $# -lt 1 ] && fatal "Expected a parameter after: -$arg"
+                val=$1
+                [ -n "$val" -a -z "${val##-*}" ] \
+                    && fatal "Suspicious argument after -$arg: $val"
+                    shift         ;;
+              *=*)  val=${arg#*=} ;;
+                *)  val="???"     ;;
+        esac
+
+        case $arg in
+                             -all|a)  CMD_BUTTONS=$($0 --list)       ;;
+          -buttons=*|-buttons|b=*|b)  CMD_BUTTONS=$val               ;;
+            -config=*|-config|c=*|c)  NEW_CONFIG=$val                ;;
+                            -help|h)  usage                          ;;
+                -idir=*|-idir|i=*|i)  CMD_IDIR=$val                  ;;
+                            -list|l)  list_buttons ; exit 0          ;;
+            -orient=*|-orient|o=*|o)  CMD_ORIENT=$val                ;;
+                            -save|s)  SAVE_CONFIG=true               ;;
+              -title=*|-title|t=*|t)  CMD_TITLE=$val                 ;;
+                            -test|T)  TEST_MODE=true                 ;;
+                                  *)  fatal "Unknown option: -$arg"  ;;
+        esac
+    done
+
+    [ $# -gt 0 ] && fatal "Extra command line arguments: $*"
+
+    [ -n "$NEW_CONFIG" -a -z "$SAVE_CONFIG" -a ! -e "$NEW_CONFIG" ] \
+        && err "Can not find config file $NEW_CONFIG"
+
+    [ "$NEW_CONFIG" ] && CONFIG_FILE=$NEW_CONFIG
+
+    [ -e "$CONFIG_FILE" ] && . $CONFIG_FILE
+
+    for var in BUTTONS IDIR ORIENT TITLE; do
+        eval val=\$CMD_$var
+        [ "$val" ] && eval $var=\$val
+    done
+
+    [ "$SAVE_CONFIG" ] && write_config $CONFIG_FILE
+
+    case $ORIENT in
+        [vV]*) BOX=vbox ;;
+        [hH]*) BOX=hbox ;;
+            *) fatal "Unknown orientation: $ORIENT" ;;
+    esac
+
+    make_buttons
+
+    DIALOG="<window title=\"$TITLE\">\n<$BOX>\n"
+    add_buttons "$BUTTONS"
+    DIALOG="$DIALOG\n</$BOX>\n</window>\n"
+
+    if [ "$TEST_MODE" ]; then
+        echo -e "$DIALOG"
+    else
+        export DIALOG=$(echo -e "$DIALOG")
+        gtkdialog -c --program=DIALOG &>/dev/null
+    fi
+}
+
+write_config() {
+    local file=$1
+    cat <<Config > $file
+#--------------------------------------------------------------------
+# $ME config file: $file
+# created: $(date +"%F %T")
+#--------------------------------------------------------------------
+
+# BUTTONS="$BUTTONS"
+# IDIR="$IDIR"
+# ORIENT="$ORIENT"
+# TITLE="$TITLE"
+Config
+}
+
+list_buttons() {
+    sed -n -r "s/^BUTTON_([a-zA-Z0-9_]+)=.*/\1/p" $0 | sort
+}
+
+add_buttons() {
+    local b name val buttons=$1
+    for b in $(echo $buttons | sed 's/,/ /g'); do
+        name=BUTTON_$b
+        eval val=\$$name
+        if [ -z "$val" ]; then
+            err "Could not find variable $name"
+            continue
+        fi
+        DIALOG="$DIALOG$val"
+    done
+}
+
+err() {
+    echo "$ME warning: $*" >&2
+}
+
+fatal() {
+    echo "$ME fatal error: $*" >&2
+    exit 3
+}
+
+make_buttons() {
+BUTTON_google="
+<button tooltip-text=\"Google Search\">
+<input file>$IDIR/google.png</input>
+<action>g</action>
+</button>
+"
+
+BUTTON_imdb="
+<button tooltip-text=\"IMDb Search\">
+<input file>$IDIR/imdb.png</input>
+<action>imdb</action>
+</button>
+"
+
+BUTTON_imdbe="
+<button tooltip-text=\"IMDb Episode Search\">
+<input file>$IDIR/imdb.png</input>
+<action>searchimdbe</action>
+</button>
+"
+
+BUTTON_dict="
+<button tooltip-text=\"Dictionary Search\">
+<input file>$IDIR/thesaurus.png</input>
+<action>word-search</action>
+</button>
+"
+
+BUTTON_wiki="
+<button tooltip-text=\"Wikipedia Search\">
+<input file>$IDIR/wiki.png</input>
+<action>wiki</action>
+</button>
+"
+
+BUTTON_mx="
+<button tooltip-text=\"MX Forums Search\">
+<input file>$IDIR/mx-logo.png</input>
+<action>mx</action>
+</button>
+"
+
+BUTTON_amazon="
+<button tooltip-text=\"Amazon Search\">
+<label>Amz</label>
+<action>amz</action>
+</button>
+"
+
+BUTTON_dvd="
+<button tooltip-text=\"Dvd IMDb\">
+<input file>$IDIR/cdrom.png</input>
+<action>imdb-disc</action>
+</button>
+"
+
+BUTTON_blank="
+<button tooltip-text=\"Blank Screen\">
+<input file>$IDIR/xscreensaver.png</input>
+<action>xset dpms force off</action>
+</button>
+"
+
+BUTTON_flash="
+<button tooltip-text=\"Kill Flash\">
+<input file>$IDIR/blam.png</input>
+<action>kill-flash</action>
+</button>
+"
+
+BUTTON_antix="
+<button tooltip-text=\"antiX Forums Search\">
+<label>antiX</label>
+<action>antix</action>
+</button>
+"
+
+BUTTON_gentoo="
+<button tooltip-text=\"Gentoo Forums Search\">
+<input file>$IDIR/Gentoo-logo.png</input>
+<action>gf</action>
+</button>
+"
+
+BUTTON_duckduckgo="
+<button tooltip-text=\"Duck Duck Go Search\">
+<input file>$IDIR/ddg-logo.png</input>
+<action>ddg</action>
+</button>
+"
+
+BUTTON_startpage="
+<button tooltip-text=\"Start Page Search\">
+<label>STP</label>
+<action>stp</action>
+</button>
+"
+
+BUTTON_saver="
+<button>
+<input file>$IDIR/xscreensaver.png</input>
+<action>set-screen-blank</action>
+</button>
+"
+
+BUTTON_saver2="
+<button>
+<input file>$IDIR/video-x-generic.png</input>
+<action>set-screen-blank</action>
+</button>
+"
+}
+
+main "$@"

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+env PATH=/usr/local/lib/search-bar/bin:$PATH search-any \
+    "https://duckduckgo.com/html?q=" "$@"

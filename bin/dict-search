@@ -1,0 +1,3 @@
+#!/bin/bash
+
+search-any "http://www.thefreedictionary.com/_/search.aspx?&Word=" "$@"

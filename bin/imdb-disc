@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Copyright 2012 -- 2014  James Bowlin (bitjam@gmail.com)
+# Released under the GPL 3
+
+dir=/dev/disk/by-label
+for sym in $(ls $dir); do
+    dev=$(readlink -f $dir/$sym)
+    case $dev in /dev/sr[0-9]) ;; *) continue;; esac
+    label=$(echo "$sym" | sed -r -e 's/_/ /g' -e 's/\\x20/ /g')
+    imdb "$label"
+    echo "$label"
+    found=true
+done
+
+#[ "$found" ] || eesh dialog_ok "All drives appear to be empty"
+

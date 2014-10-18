@@ -1,0 +1,5 @@
+#!/bin/bash
+
+env PATH=/usr/local/lib/search-bar/bin:$PATH search-any \
+    "http://www.imdb.com/find?s=ep&q=" "$@"
+

@@ -1,0 +1,3 @@
+#!/bin/bash
+search-any "http://en.wikipedia.org/w/index.php?search=" "$@"
+
