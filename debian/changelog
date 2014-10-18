@@ -1,0 +1,5 @@
+search-bar (14.2+1) mx; urgency=low
+
+  * Initial packaging.
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 18 Oct 2014 12:57:40 -0400
