@@ -8,7 +8,7 @@ ME=${0##*/}
 IDIR=/usr/local/share/icons/search-bar
 
        TITLE="Search Bar"
-     BUTTONS="startpage,duckduckgo,google,imdb,dict,wiki,mx,antix,amazon"
+     BUTTONS="startpage,duckduckgo,google,imdb,dict,wiki,mx,antix"
       ORIENT="v"
    TEST_MODE=
  CONFIG_FILE=$HOME/.config/$ME.conf
