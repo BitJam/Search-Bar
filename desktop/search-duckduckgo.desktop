@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Duck Duck Go Search
+Type=Application
+Exec=/usr/local/bin/ddg
+TryExec=ddg
+Comment=Search for any highlighted text
+Icon=/usr/local/share/icons/search-bar/ddg-logo.png
+Categories=Search;
+

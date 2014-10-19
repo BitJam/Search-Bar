@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Dictionary Search
+Type=Application
+Exec=/usr/local/bin/dict
+TryExec=dict
+Comment=Search for any highlighted text
+Icon=/usr/local/share/icons/search-bar/dictionary.png
+Categories=Search;
+

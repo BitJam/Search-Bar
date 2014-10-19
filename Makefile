@@ -33,5 +33,9 @@ deb:
 	mkdir -p deb
 	make install PREFIX=deb
 
+desktop:
+	rm -rf desktop/
+	./make-desktop-files
+
 clean:
-	rm -rf deb
+	rm -rf deb/ desktop/

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Gentoo Forums Search
+Type=Application
+Exec=/usr/local/bin/gf
+TryExec=gf
+Comment=Search for any highlighted text
+Icon=/usr/local/share/icons/search-bar/Gentoo-logo.png
+Categories=Search;
+

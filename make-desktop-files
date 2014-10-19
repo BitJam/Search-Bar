@@ -1,0 +1,42 @@
+#!/usr/bin/perl
+
+use strict;
+
+my $idir = "/usr/local/share/icons/search-bar";
+my $ddir = "desktop";
+
+my ($name, $desc, $icon, $exec);
+
+system("mkdir", "-p", $ddir);
+
+for (`cat bin/search-bar`) {
+    m/^BUTTON_(\w+)=/                  and $name = $1;
+    m/^BUTTON_(\w+)=/                  and print "$name\n";
+    
+    m/tooltip-text=\\"([^\\]+)\\"/     and $desc = $1;
+    m{<input file>.IDIR/([\w-]+.png)}  and $icon = $1;
+    m/<action>(\w+)/                   and $exec = $1;
+    m/^"$/                             and write_file($name, $desc, $icon, $exec);
+}
+
+sub write_file {
+    $name or return;
+    $icon or return;
+    my $ofile = "$ddir/search-$name.desktop";
+    open my $hand, ">", $ofile or die "Could not open($ofile) $!\n";
+
+    print $hand <<Desktop_File;
+[Desktop Entry]
+Name=$desc
+Type=Application
+Exec=/usr/local/bin/$exec
+TryExec=$exec
+Comment=Search for any highlighted text
+Icon=$idir/$icon
+Categories=Search;
+
+Desktop_File
+
+    close $hand or die "Closing $ofile $!\n";
+    $name = $desc = $icon = $exec = undef;
+}
