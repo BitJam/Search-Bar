@@ -207,27 +207,6 @@ BUTTON_amazon="
 </button>
 "
 
-BUTTON_dvd="
-<button tooltip-text=\"Dvd IMDb\">
-<input file>$IDIR/cdrom.png</input>
-<action>imdb-disc</action>
-</button>
-"
-
-BUTTON_blank="
-<button tooltip-text=\"Blank Screen\">
-<input file>$IDIR/xscreensaver.png</input>
-<action>xset dpms force off</action>
-</button>
-"
-
-BUTTON_flash="
-<button tooltip-text=\"Kill Flash\">
-<input file>$IDIR/blam.png</input>
-<action>kill-flash</action>
-</button>
-"
-
 BUTTON_antix="
 <button tooltip-text=\"antiX Forums Search\">
 <input file>$IDIR/antiX-logo.png</input>
@@ -256,14 +235,35 @@ BUTTON_startpage="
 </button>
 "
 
-BUTTON_saver="
+xBUTTON_dvd="
+<button tooltip-text=\"Dvd IMDb\">
+<input file>$IDIR/cdrom.png</input>
+<action>imdb-disc</action>
+</button>
+"
+
+xBUTTON_blank="
+<button tooltip-text=\"Blank Screen\">
+<input file>$IDIR/xscreensaver.png</input>
+<action>xset dpms force off</action>
+</button>
+"
+
+xBUTTON_flash="
+<button tooltip-text=\"Kill Flash\">
+<input file>$IDIR/blam.png</input>
+<action>kill-flash</action>
+</button>
+"
+
+xBUTTON_saver="
 <button>
 <input file>$IDIR/xscreensaver.png</input>
 <action>set-screen-blank</action>
 </button>
 "
 
-BUTTON_saver2="
+xBUTTON_saver2="
 <button>
 <input file>$IDIR/video-x-generic.png</input>
 <action>set-screen-blank</action>
