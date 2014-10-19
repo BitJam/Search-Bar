@@ -181,7 +181,7 @@ BUTTON_imdbe="
 
 BUTTON_dict="
 <button tooltip-text=\"Dictionary Search\">
-<input file>$IDIR/thesaurus.png</input>
+<input file>$IDIR/dictionary.png</input>
 <action>dict-search</action>
 </button>
 "
@@ -230,7 +230,7 @@ BUTTON_flash="
 
 BUTTON_antix="
 <button tooltip-text=\"antiX Forums Search\">
-<label>antiX</label>
+<input file>$IDIR/antiX-logo.png</input>
 <action>antix</action>
 </button>
 "
@@ -251,7 +251,7 @@ BUTTON_duckduckgo="
 
 BUTTON_startpage="
 <button tooltip-text=\"Start Page Search\">
-<label>STP</label>
+<input file>$IDIR/startpage-logo.png</input>
 <action>stp</action>
 </button>
 "
