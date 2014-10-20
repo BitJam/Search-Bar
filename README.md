@@ -60,6 +60,16 @@ Here are the valid make targets:
     make deb        install to deb/ subdirectory
     make clean      delete the deb/ subdirectory
 
+
+Desktop Files
+-------------
+Desktop files have been added, along with a Perl script to
+generate them from the search-bar script.  They can be used to
+add desktop icons for the searches (instead of the all-in-one
+search-bar application) and for creating search entries in the
+desktop menu.
+
+
 Customization
 -------------
 It is very easy to add new search scripts.  For example,
