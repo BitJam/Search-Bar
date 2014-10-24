@@ -33,7 +33,7 @@ Exec=/usr/local/bin/$exec
 TryExec=$exec
 Comment=Search for any highlighted text
 Icon=$idir/$icon
-Categories=Search;
+Categories=X-Search;
 
 Desktop_File
 

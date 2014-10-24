@@ -5,5 +5,5 @@ Exec=/usr/local/bin/g
 TryExec=g
 Comment=Search for any highlighted text
 Icon=/usr/local/share/icons/search-bar/google.png
-Categories=Search;
+Categories=X-Search;
 

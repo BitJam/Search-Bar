@@ -5,5 +5,5 @@ Exec=/usr/local/bin/mx
 TryExec=mx
 Comment=Search for any highlighted text
 Icon=/usr/local/share/icons/search-bar/mx-logo.png
-Categories=Search;
+Categories=X-Search;
 

@@ -5,5 +5,5 @@ Exec=/usr/local/bin/searchimdbe
 TryExec=searchimdbe
 Comment=Search for any highlighted text
 Icon=/usr/local/share/icons/search-bar/imdb.png
-Categories=Search;
+Categories=X-Search;
 

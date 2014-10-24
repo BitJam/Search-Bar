@@ -5,5 +5,5 @@ Exec=/usr/local/bin/wiki
 TryExec=wiki
 Comment=Search for any highlighted text
 Icon=/usr/local/share/icons/search-bar/wiki.png
-Categories=Search;
+Categories=X-Search;
 

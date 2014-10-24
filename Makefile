@@ -5,6 +5,7 @@ NAME      := search-bar
 ICON_DIR  := $(PREFIX)$(TO_DIR)/share/icons/$(NAME)
 BIN_DIR   := $(PREFIX)$(TO_DIR)/bin
 LIB_DIR   := $(PREFIX)$(TO_DIR)/lib/$(NAME)/bin
+DESK_DIR  := $(PREFIX)$(TO_DIR)/share/applications/$(NAME)
 CP        := cp --preserve=mode
 BIN_FILES := $(shell find bin -type f -executable)
 
@@ -27,6 +28,9 @@ install:
 	$(CP) lib/* $(LIB_DIR)/
 	mkdir -p $(BIN_DIR)
 	$(CP) $(BIN_FILES) $(BIN_DIR)/
+	./make-desktop-files
+	mkdir -p $(DESK_DIR)
+	$(CP) desktop/*.desktop $(DESK_DIR)/
 
 deb:
 	rm -rf deb

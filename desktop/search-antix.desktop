@@ -5,5 +5,5 @@ Exec=/usr/local/bin/antix
 TryExec=antix
 Comment=Search for any highlighted text
 Icon=/usr/local/share/icons/search-bar/antiX-logo.png
-Categories=Search;
+Categories=X-Search;
 
