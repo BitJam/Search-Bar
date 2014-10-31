@@ -161,7 +161,7 @@ make_buttons() {
 BUTTON_google="
 <button tooltip-text=\"Google Search\">
 <input file>$IDIR/google.png</input>
-<action>g</action>
+<action>gg</action>
 </button>
 "
 
