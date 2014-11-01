@@ -18,12 +18,12 @@ if [ -z "$DISPLAY" ]; then
     alt_browser=www-browser
 else
     CLI=
-    browser_var=BROSWER
+    browser_var=BROWSER
     browser_list="xdg-open iceweasel firefox"
     alt_browser=x-www-browser
 fi
 
-eval def_browser=\$$BROWSWER_VAR
+eval def_browser=\$$browser_var
 for b in $def_browser $(readlink -f $alt_dir/$alt_browser) $browser_list; do
     b=$(which $b 2>/dev/null) || continue
     test -x $b || continue
@@ -35,12 +35,15 @@ done
 
 if [ -z "$browser" ]; then
     echo "Could not find any$CLI browser!" >&2
-    echo "Please set $BROWSER_VAR to a valid browswer executable" >&2
+    echo "Please set $browser_var to a valid browswer executable" >&2
     exit 2
 fi
 
-# Use clipboard if no search terms are given
-[ $# -gt 0 ] || set -- $(xclip -o)
+# Use clipboard if asked
+if [ "$1" = --clipboard ]; then
+    shift
+    set -- $(xclip -o)
+fi
 
 # If the first arg looks like a URL, go directly to it
 lower=${*,,}
