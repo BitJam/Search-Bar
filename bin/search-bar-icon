@@ -1,0 +1,19 @@
+#!/bin/bash
+
+icon=/usr/local/share/icons/search-bar/eye-icon.png
+default="gg"
+
+menu="Google!gg --|StartPage!stp --|DuckDuckGo!ddg --|Wikipedia!wiki --"
+menu="$menu|MX forums!mx --|antiX Forums!antix --|Quit!kill $$"
+
+menu=$(echo "$menu" | sed 's/--/--clipboard/g')
+
+tip="Search for hightlighted text"
+
+# create the notification icon
+yad --notification                   \
+    --image="$icon"                  \
+    --text="$tip"                    \
+    --menu="$menu"                   \
+    --command="$default --clipboard"
+
