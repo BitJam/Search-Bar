@@ -9,7 +9,7 @@ IDIR=/usr/local/share/icons/search-bar
 
        TITLE="Search Bar"
      BUTTONS="startpage,duckduckgo,google,imdb,dict,wiki,mx,antix"
-      ORIENT="v"
+      ORIENT="h"
    TEST_MODE=
  CONFIG_FILE=$HOME/.config/$ME.conf
 
@@ -161,77 +161,77 @@ make_buttons() {
 BUTTON_google="
 <button tooltip-text=\"Google Search\">
 <input file>$IDIR/google.png</input>
-<action>gg</action>
+<action>gg --clipboard</action>
 </button>
 "
 
 BUTTON_imdb="
 <button tooltip-text=\"IMDb Search\">
 <input file>$IDIR/imdb.png</input>
-<action>imdb</action>
+<action>imdb --clipboard</action>
 </button>
 "
 
 BUTTON_imdbe="
 <button tooltip-text=\"IMDb Episode Search\">
 <input file>$IDIR/imdb.png</input>
-<action>searchimdbe</action>
+<action>searchimdbe --clipboard</action>
 </button>
 "
 
 BUTTON_dict="
 <button tooltip-text=\"Dictionary Search\">
 <input file>$IDIR/dictionary.png</input>
-<action>dict-search</action>
+<action>dict-search --clipboard</action>
 </button>
 "
 
 BUTTON_wiki="
 <button tooltip-text=\"Wikipedia Search\">
 <input file>$IDIR/wiki.png</input>
-<action>wiki</action>
+<action>wiki --clipboard</action>
 </button>
 "
 
 BUTTON_mx="
 <button tooltip-text=\"MX Forums Search\">
 <input file>$IDIR/mx-logo.png</input>
-<action>mx</action>
+<action>mx --clipboard</action>
 </button>
 "
 
 BUTTON_amazon="
 <button tooltip-text=\"Amazon Search\">
 <label>Amz</label>
-<action>amz</action>
+<action>amz --clipboard</action>
 </button>
 "
 
 BUTTON_antix="
 <button tooltip-text=\"antiX Forums Search\">
 <input file>$IDIR/antiX-logo.png</input>
-<action>antix</action>
+<action>antix --clipboard</action>
 </button>
 "
 
 BUTTON_gentoo="
 <button tooltip-text=\"Gentoo Forums Search\">
 <input file>$IDIR/Gentoo-logo.png</input>
-<action>gf</action>
+<action>gf --clipboard</action>
 </button>
 "
 
 BUTTON_duckduckgo="
 <button tooltip-text=\"Duck Duck Go Search\">
 <input file>$IDIR/ddg-logo.png</input>
-<action>ddg</action>
+<action>ddg --clipboard</action>
 </button>
 "
 
 BUTTON_startpage="
 <button tooltip-text=\"Start Page Search\">
 <input file>$IDIR/startpage-logo.png</input>
-<action>stp</action>
+<action>stp --clipboard</action>
 </button>
 "
 
