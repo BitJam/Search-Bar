@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Search Bar Icon
+Comment=System tray icon for to search Web for highlighted text
+Exec=search-bar-icon
+Icon=/usr/local/share/icons/search-bar/eye-icon.png
+Terminal=false
+Type=Application
+Categories=Network;
+NoDisplay=False
