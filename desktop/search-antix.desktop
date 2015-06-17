@@ -6,4 +6,4 @@ TryExec=antix
 Comment=Search for any highlighted text
 Icon=/usr/local/share/icons/search-bar/antiX-logo.png
 Categories=Network;
-
+NoDisplay=True

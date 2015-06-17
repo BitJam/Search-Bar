@@ -6,4 +6,4 @@ TryExec=gf
 Comment=Search for any highlighted text
 Icon=/usr/local/share/icons/search-bar/Gentoo-logo.png
 Categories=Network;
-
+NoDisplay=True

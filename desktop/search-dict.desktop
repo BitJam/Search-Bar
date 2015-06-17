@@ -6,4 +6,4 @@ TryExec=dict-search
 Comment=Search for any highlighted text
 Icon=/usr/local/share/icons/search-bar/dictionary.png
 Categories=Network;
-
+NoDisplay=True

@@ -6,4 +6,4 @@ TryExec=wiki
 Comment=Search for any highlighted text
 Icon=/usr/local/share/icons/search-bar/wiki.png
 Categories=Network;
-
+NoDisplay=True
