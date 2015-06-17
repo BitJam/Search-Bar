@@ -1,14 +1,22 @@
 #!/bin/bash
 
 icon=/usr/local/share/icons/search-bar/eye-icon.png
-default="gg"
+default="stp"
+default_name="StartPage"
 
-menu="Google!gg --|StartPage!stp --|DuckDuckGo!ddg --|Wikipedia!wiki --"
-menu="$menu|MX forums!mx --|antiX Forums!antix --|Quit!kill -9 $$"
+if [ $# -eq 2 ]; then
+    default=$1
+    default_name=$2
+fi
 
-menu=$(echo "$menu" | sed 's/--/--clipboard/g')
+tip="Search for highlighted text ($default_name)"
 
-tip="Search for hightlighted text"
+menu="Start Page!stp --|Duck Duck Go!ddg --|Google!gg --|Wikipedia!wiki --"
+menu="$menu|Movies!imdb --|Dictionary!dict-search --"
+menu="$menu|MX Forums!mx --|antiX Forums!antix --|Quit!kill -9 $$"
+
+#menu=$(echo "$menu" | sed 's/--/--clipboard/g')
+
 
 # create the notification icon
 exec yad --notification              \
@@ -16,5 +24,5 @@ exec yad --notification              \
     --image="$icon"                  \
     --text="$tip"                    \
     --menu="$menu"                   \
-    --command="$default --clipboard"
+    --command="$default --clipboard"  &>/dev/null
 
