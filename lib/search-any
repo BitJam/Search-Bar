@@ -40,14 +40,13 @@ if [ -z "$browser" ]; then
 fi
 
 # Use clipboard if asked
-if [ "$1" = --clipboard ]; then
-    shift
-    set -- $(xclip -o)
-fi
+case $1 in
+    --|--clipboard) shift;  set -- $(xclip -o);;
+esac
 
 # If the first arg looks like a URL, go directly to it
 lower=${*,,}
-url_match=$(expr match "$lower" '^\(http\|https\|ftp\)://')
+url_match=$(expr match "$lower" '^\(http\|https\|ftp\|file\)://')
 
 if [ -n "$url_match" ]; then
     args="$*"
