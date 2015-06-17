@@ -1,9 +1,9 @@
 [Desktop Entry]
-Name=Google Search
+Name=Search Google
 Type=Application
 Exec=/usr/local/bin/gg
 TryExec=gg
 Comment=Search for any highlighted text
 Icon=/usr/local/share/icons/search-bar/google.png
-Categories=X-Search;
+Categories=Network;
 
